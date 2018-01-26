@@ -1,0 +1,23 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "An amazon like- store front database using Mysql and node.js",
+  "main": "bamazonCustomer.js.",
+  "scripts": {
+    "test": "node bamazonCustomer.js."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shirleymramirez/bamazon.git"
+  },
+  "author": "Shirley Ramirez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shirleymramirez/bamazon/issues"
+  },
+  "homepage": "https://github.com/shirleymramirez/bamazon#readme",
+  "dependencies": {
+    "inquirer": "^5.0.1",
+    "mysql": "^2.15.0"
+  }
+}
