@@ -1,6 +1,15 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-var table = require("table");
+var Table = require("cli-table");
+
+
+// packages used for color changes in the console log output
+const chalk = require("chalk");
+
+// assigned constant for colors to be used for console log
+const error = chalk.bold.red;
+const warning = chalk.keyword("orange");
+const log = console.log;
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -15,7 +24,19 @@ connection.connect(function(err) {
     console.log("Connection as id: " + connection.threadId);
     connection.query("SELECT item_id, product_name, price FROM products", function(err, res) {
         if (err) throw err;
-        console.log(res);
+
+        var table = new Table({
+            head: ['Item Id#', 'Product Name', 'Price'],
+            style: {
+                head: ['blue'],
+                compact: false,
+                colAligns: ['center']
+            }
+        });
+        for (var i = 0; i < res.length; i++) {
+            table.push([res[i].item_id, res[i].product_name, res[i].price]);
+        }
+        console.log(table.toString());
         console.log();
         startOrder();
     });
@@ -26,7 +47,7 @@ function startOrder() {
     inquirer.prompt([{
         name: "itemId",
         type: "input",
-        message: "Please enter the item ID of the product you would like to purchase?",
+        message: "Please enter the item ID of the product you would like to purchase",
         validate: function(value) {
             if (isNaN(value) == false) {
                 return true;
@@ -53,20 +74,26 @@ function startOrder() {
             var productData = res[0];
             if (stockQuantity <= productData.stock_quantity) {
                 console.log();
-                console.log("We have enough stocks for you, placing your order now...");
+                console.log("We have enough stocks for you, placing your order now ...");
+                console.log();
                 var updateQueryStr = "UPDATE products SET stock_quantity = " + (productData.stock_quantity - stockQuantity) + ' WHERE ?';
                 connection.query(updateQueryStr, { item_id: productData.item_id }, function(err, res) {
                     if (err) throw err;
                     console.log("Your order has been placed.");
+                    console.log();
+                    console.log(stockQuantity + " items purchased");
+                    console.log(productData.product_name + ' ' + productData.price);
                     console.log("Your Total Cost is $ " + (productData.price * stockQuantity));
                     console.log("Thank you for shopping with us!");
                     console.log("\n------------------------------------\n")
                     process.exit(1);
                 });
             } else {
-                console.log("Sorry, Insufficient quantity!");
+                console.log();
+                console.log("Sorry, we have insufficient quantity ...");
                 console.log("Please modify your order.");
                 console.log("\n------------------------------------\n");
+                process.exit(1);
             }
         });
     })
