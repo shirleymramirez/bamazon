@@ -21,7 +21,6 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    console.log("Connection as id: " + connection.threadId);
     connection.query("SELECT item_id, product_name, price FROM products", function(err, res) {
         if (err) throw err;
 
@@ -36,8 +35,11 @@ connection.connect(function(err) {
         for (var i = 0; i < res.length; i++) {
             table.push([res[i].item_id, res[i].product_name, res[i].price]);
         }
-        console.log(table.toString());
-        console.log();
+        log();
+        log(chalk.yellow.underline.bold("Welcome to bamazon Online Store ") + chalk.green.underline.bold("by Shirley Ramirez"));
+        log();
+        log(table.toString());
+        log();
         startOrder();
     });
 });
@@ -73,26 +75,27 @@ function startOrder() {
         connection.query(queryStr, { item_id: answer.itemId }, function(err, res) {
             var productData = res[0];
             if (stockQuantity <= productData.stock_quantity) {
-                console.log();
-                console.log("We have enough stocks for you, placing your order now ...");
-                console.log();
+                log();
+                log("We have enough stocks for you, placing your order now ...");
+                log();
                 var updateQueryStr = "UPDATE products SET stock_quantity = " + (productData.stock_quantity - stockQuantity) + ' WHERE ?';
                 connection.query(updateQueryStr, { item_id: productData.item_id }, function(err, res) {
                     if (err) throw err;
-                    console.log("Your order has been placed.");
-                    console.log();
-                    console.log(stockQuantity + " items purchased");
-                    console.log(productData.product_name + ' ' + productData.price);
-                    console.log("Your Total Cost is $ " + (productData.price * stockQuantity));
-                    console.log("Thank you for shopping with us!");
-                    console.log("\n------------------------------------\n")
+                    log(chalk.green("Your order has been placed."));
+                    log();
+                    log(chalk.magenta("\n----------------------------------------\n"));
+                    log(chalk.yellow(stockQuantity) + " items purchased");
+                    log(chalk.cyan(productData.product_name) + ' which cost' + " $" + chalk.yellow(productData.price) + ' each');
+                    log("Your " + chalk.cyan("Total Cost ") + "is $" + chalk.yellow(productData.price * stockQuantity));
+                    log("Thank you for shopping with us!");
+                    log(chalk.magenta("\n---------------------------------------\n"));
                     process.exit(1);
                 });
             } else {
                 console.log();
-                console.log("Sorry, we have insufficient quantity ...");
-                console.log("Please modify your order.");
-                console.log("\n------------------------------------\n");
+                log(error("Sorry, we have insufficient quantity of ") + chalk.green(productData.product_name));
+                log(error("Please modify your order."));
+                log(chalk.magenta("\n-----------------------------------------\n"));
                 process.exit(1);
             }
         });
