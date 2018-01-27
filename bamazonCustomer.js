@@ -1,9 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require("cli-table");
-
-
-// packages used for color changes in the console log output
 const chalk = require("chalk");
 
 // assigned constant for colors to be used for console log
