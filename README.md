@@ -15,7 +15,7 @@
 
 ## There are 3 Challenges needed to be done 
  
- ### Customer view
+ ### First - Customer view
    - Created a database called `bamazon`in mysql workbench
    
    - Then a table inside the database with the following columns
@@ -51,10 +51,27 @@
  ![screen shot 2018-01-26 at 5 38 30 pm](https://user-images.githubusercontent.com/31137669/35466804-7f49f180-02c4-11e8-9789-0c8c1dfea0a1.png)
 
     
-    
-    
+### Second - Manager View
+  - Created a new Node application called `bamazonManager.js`. Running this application will list a set of menu options like shown below:
  
- ### Manager View
+ ![screen shot 2018-01-27 at 7 37 07 pm](https://user-images.githubusercontent.com/31137669/35478408-074321ee-039a-11e8-8350-aada08e0426d.png)
+
+- If a manager selects `View Products for Sale`, the app should list every available item: the item IDs, names, prices, and quantities.
+
+![screen shot 2018-01-27 at 7 44 19 pm](https://user-images.githubusercontent.com/31137669/35478430-882dded4-039a-11e8-91cd-5e206542bf3c.png)
+
+- If a manager selects `View Low Inventory`, then it should list all items with an inventory count lower than five.
+
+![screen shot 2018-01-27 at 7 46 34 pm](https://user-images.githubusercontent.com/31137669/35478440-d342bc46-039a-11e8-842b-f880d4d2998f.png)
+
+- If a manager selects `Add to Inventory`, your app should display a prompt that will let the manager "add more" of any item currently in the store.
+
+![screen shot 2018-01-27 at 7 48 46 pm](https://user-images.githubusercontent.com/31137669/35478449-23ed8414-039b-11e8-891d-0f093c10b646.png)
+
+-If a manager selects `Add New Product`, it should allow the manager to add a completely new product to the store.
+
+![screen shot 2018-01-27 at 7 54 04 pm](https://user-images.githubusercontent.com/31137669/35478482-e069376e-039b-11e8-8aa9-291298670bc7.png)
+
  
  ### Supervisor view
    
