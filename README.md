@@ -74,6 +74,27 @@
 
  
  ### Supervisor view
+   - Created a new MySQL table called `departments` with the following columns:
+      - department_id
+      - department_name 
+      - over_head_costs (A dummy number you set for each department)
+  - Modified the products table so that there's a product_sales column
+  
+![screen shot 2018-01-28 at 12 45 32 pm](https://user-images.githubusercontent.com/31137669/35486290-35a125ba-0429-11e8-99c5-b3c74bd88a79.png)
+
+- Modified the `bamazonCustomer.js` app so that this value is updated with each individual products total revenue from each sale, and in the database's column. Terminal output are shown below as well as the updated values in mysql database.
+
+![screen shot 2018-01-28 at 12 40 58 pm](https://user-images.githubusercontent.com/31137669/35486331-ff684bb2-0429-11e8-90c5-63a659d3555d.png)
+
+![screen shot 2018-01-28 at 12 41 36 pm](https://user-images.githubusercontent.com/31137669/35486336-0be010a0-042a-11e8-8adb-9d65f8ae83af.png)
+
+![screen shot 2018-01-28 at 12 41 55 pm](https://user-images.githubusercontent.com/31137669/35486344-1a2bb2fe-042a-11e8-857b-b27f55fe4403.png)
+
+Making sure that our app still updates the inventory listed in the products column.
+
+
+
+
    
 ## Copyright
 Copyright © 2018 Shirley Ramirez
