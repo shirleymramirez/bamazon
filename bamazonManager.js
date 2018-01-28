@@ -58,8 +58,7 @@ function managerView() {
 }
 
 function productsForSale() {
-    connection.query(
-        "SELECT item_id, product_name, price, stock_quantity FROM products",
+    connection.query("SELECT item_id, product_name, price, stock_quantity FROM products",
         function(err, res) {
             if (err) throw err;
             var table = new Table({
@@ -88,10 +87,7 @@ function productsForSale() {
 }
 
 function lowInventory() {
-    connection.query("SELECT * FROM products WHERE stock_quantity < 5 ", function(
-        err,
-        res
-    ) {
+    connection.query("SELECT * FROM products WHERE stock_quantity < 5 ", function(err, res) {
         if (err) throw err;
         log("Products with Low inventory");
         var table = new Table({
@@ -120,8 +116,7 @@ function lowInventory() {
 
 function addInventory() {
     log();
-    inquirer
-        .prompt([{
+    inquirer.prompt([{
                 name: "itemId",
                 type: "input",
                 message: "Please enter the item ID you wish to add.",
@@ -149,10 +144,7 @@ function addInventory() {
         .then(function(answer) {
             var addQuantity = parseInt(answer.quantity);
             var queryStr = "SELECT * FROM products WHERE ? ";
-            connection.query(queryStr, { item_id: answer.itemId }, function(
-                err,
-                res
-            ) {
+            connection.query(queryStr, { item_id: answer.itemId }, function(err, res) {
                 if (err) throw err;
                 var productData = res[0];
                 log(chalk.magenta("\n----------------------------------------\n"));
@@ -161,25 +153,13 @@ function addInventory() {
                 log();
                 log(chalk.magenta("\n----------------------------------------\n"));
                 var resStockQuantity = parseInt(productData.stock_quantity);
-                var updateQueryStr =
-                    "UPDATE products SET stock_quantity = " +
-                    (resStockQuantity + addQuantity) +
-                    " WHERE ?";
-                connection.query(
-                    updateQueryStr, { item_id: productData.item_id },
+                var updateQueryStr = "UPDATE products SET stock_quantity = " + (resStockQuantity + addQuantity) + " WHERE ?";
+                connection.query(updateQueryStr, { item_id: productData.item_id },
                     function(err, res) {
                         if (err) throw err;
                         log();
-                        log(
-                            "Stock count for Item ID " +
-                            productData.item_id +
-                            ", " +
-                            "item- " +
-                            chalk.green(productData.product_name) +
-                            " has been updated to " +
-                            chalk.cyan(resStockQuantity + addQuantity) +
-                            "."
-                        );
+                        log("Stock count for Item ID " + productData.item_id + ", " +
+                            "item- " + chalk.green(productData.product_name) + " has been updated to " + chalk.cyan(resStockQuantity + addQuantity) + ".");
                         log();
                         log(chalk.magenta("\n----------------------------------------\n"));
                     }
@@ -190,79 +170,52 @@ function addInventory() {
 }
 
 function addNewProduct() {
-    inquirer
-        .prompt([{
-                name: "item_id",
-                type: "input",
-                message: "Please enter the item ID: "
-            },
-            {
-                name: "product_name",
-                type: "input",
-                message: "Please enter the name of the product: "
-            },
-            {
-                name: "department_name",
-                type: "input",
-                message: "Please enter the department name of the product: "
-            },
-            {
-                name: "price",
-                type: "input",
-                message: "Please enter the price of the item: ",
-                validation: function(value) {
-                    if (isNaN(value) == false) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+    inquirer.prompt([{
+            name: "item_id",
+            type: "input",
+            message: "Please enter the item ID: "
+        },
+        {
+            name: "product_name",
+            type: "input",
+            message: "Please enter the name of the product: "
+        },
+        {
+            name: "department_name",
+            type: "input",
+            message: "Please enter the department name of the product: "
+        },
+        {
+            name: "price",
+            type: "input",
+            message: "Please enter the price of the item: ",
+            validation: function(value) {
+                if (isNaN(value) == false) {
+                    return true;
+                } else {
+                    return false;
                 }
-            },
-            {
-                name: "stock_quantity",
-                type: "input",
-                message: "Please enter the quantity of the item: "
             }
-        ])
-        .then(function(answer) {
-            log("Adding New Item: \n    product_name = " + answer.product_name + "\n" + "    department_name = " + answer.department_name + "\n" + "    price = " + answer.price +
-                "\n" + "    stock_quantity = " + answer.stock_quantity);
+        },
+        {
+            name: "stock_quantity",
+            type: "input",
+            message: "Please enter the quantity of the item: "
+        }
+    ]).then(function(answer) {
+        log(chalk.magenta("\n----------------------------------------\n"));
+        log("Adding New Item: \n    product_name = " + answer.product_name + "\n" + "    department_name = " + answer.department_name + "\n" + "    price = " + answer.price +
+            "\n" + "    stock_quantity = " + answer.stock_quantity);
 
-            var queryStr = "INSERT INTO products SET ?";
-            connection.query(queryStr, answer, function(err, res, fields) {
-                log(res.insert);
-                if (err) throw err;
-                log("New product has been added to the inventory under Item ID " + res.insertId + ".");
-
-                var table = new Table({
-                    head: [
-                        "Item Id#",
-                        "Product Name",
-                        "Department Name",
-                        "Price",
-                        "Quantity"
-                    ],
-                    style: {
-                        head: ["blue"],
-                        compact: false,
-                        colAligns: ["center"]
-                    }
-                });
-                for (var i = 0; i < res.length; i++) {
-                    table.push([
-                        res[i].item_id,
-                        res[i].product_name,
-                        res[i].department_name,
-                        res[i].price,
-                        res[i].stock_quantity
-                    ]);
-                }
-                log();
-                log(table.toString());
-                log();
-                connection.end();
-                log();
-
-            });
+        var queryStr = "INSERT INTO products SET ?";
+        connection.query(queryStr, answer, function(err, res, fields) {
+            if (err) throw err;
+            log();
+            log(chalk.magenta("\n----------------------------------------\n"));
+            log("New product has been added to the inventory under Item ID " + res.insertId + ".");
+            log(chalk.magenta("\n----------------------------------------\n"));
+            var newqueryStr = "SELECT item_id, product_name, department_name, price, stock_quantity FROM products WHERE ?";
+            connection.end();
         });
+    });
 }
