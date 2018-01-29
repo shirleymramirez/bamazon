@@ -36,10 +36,9 @@ function supervisorView() {
 
 function viewProductSales() {
     connection.query(
-        " SELECT departments.department_id, departments.department_name, over_head_costs, product_sales  " +
-        " FROM products " +
-        " JOIN departments " +
-        " ON products.item_id = departments.department_id ",
+        " SELECT departments.department_id, departments.department_name, departments.over_head_costs, product_sales, (product_sales-departments.over_head_costs) AS total_profit  " +
+        " FROM products JOIN departments" +
+        " ON products.department_name = departments.department_name WHERE departments.department_name IS NOT NULL ",
         function(err, res) {
             if (err) throw err;
             var table = new Table({
@@ -56,13 +55,14 @@ function viewProductSales() {
                     allign: ["center"]
                 }
             });
+
             for (var i = 0; i < res.length; i++) {
                 table.push([
                     res[i].department_id,
                     res[i].department_name,
                     res[i].over_head_costs,
                     res[i].product_sales,
-                    // res[i].total_profit
+                    res[i].total_profit
                 ]);
             }
             log();

@@ -41,14 +41,10 @@ CREATE TABLE departments(
 );
 
 INSERT INTO departments(department_name, over_head_costs)
-VALUES ('garden',        10000),
-	   ('pets',          20000),
-       ('kids ',         10000),
-	   ('books',         10000),
-       ('movies',        10000),
-       ('music',         10000),
-       ('toys and baby', 10000),
-       ('school supply', 10000)
-
-
+VALUES ('home and kitchen',        			100),
+	   ('clothing,shoes and jewelry',       200),
+       ('grocery and Gourment food ',       1000),
+	   ('sports and outdoor',         		300),
+       ('school supply',                    2000),
+       ('beauty and personal care',         500)
 
