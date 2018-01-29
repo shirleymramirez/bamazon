@@ -50,3 +50,5 @@ VALUES ('garden',        10000),
        ('toys and baby', 10000),
        ('school supply', 10000)
 
+
+
