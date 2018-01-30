@@ -98,7 +98,7 @@ function productsForSale() {
 }
 
 function lowInventory() {
-    // manager can view all products for that is lower than 5 number of stocks
+    // manager can view all products that is lower than 5 number of stocks
     // through connection.query"SELECT" and
     // outputted using CLI-table packages
     connection.query("SELECT * FROM products WHERE stock_quantity < 5 ", function(err, res) {
@@ -231,7 +231,7 @@ function addNewProduct() {
         // this will insert new column data into the table named "product"
         // update the console log the items that has been added as well with its item id
         var queryStr = "INSERT INTO products SET ?";
-        connection.query(queryStr, answer, function(err, res, fields) {
+        connection.query(queryStr, answer, function(err, res) {
             if (err) throw err;
 
             log();
