@@ -80,7 +80,7 @@
       - over_head_costs (A dummy number you set for each department)
   - Modified the products table so that there's a product_sales column
   
-![screen shot 2018-01-28 at 12 45 32 pm](https://user-images.githubusercontent.com/31137669/35486290-35a125ba-0429-11e8-99c5-b3c74bd88a79.png)
+![screen shot 2018-01-29 at 11 33 26 pm](https://user-images.githubusercontent.com/31137669/35551544-d9541572-054c-11e8-8c6e-443bb269d567.png)
 
 - Modified the `bamazonCustomer.js` app so that this value is updated with each individual products total revenue from each sale, and in the database's column. Terminal output are shown below as well as the updated values in mysql database.
 
@@ -92,9 +92,25 @@
 
 Making sure that our app still updates the inventory listed in the products column.
 
+- Created another Node app called `bamazonSupervisor.js`. Running this application will list a set of menu options as shown below:
 
+![screen shot 2018-01-29 at 11 12 58 pm](https://user-images.githubusercontent.com/31137669/35551132-08d87574-054b-11e8-82d4-f579f604c6eb.png)
 
+- When a supervisor selects View Product Sales by Department, the app should display a summarized table in their terminal/bash window. 
 
+![screen shot 2018-01-29 at 10 43 29 pm](https://user-images.githubusercontent.com/31137669/35551213-59fe509a-054b-11e8-907c-658e2a349d3c.png)
+
+    - The total_profit column was calculated on the fly using the difference between over_head_costs and product_sales. 
+    - It was not stored in any database. Used a custom alias for total_profit.
+
+- When a supervisor selects Create New Department, below is the output in the terminal
+
+ ![screen shot 2018-01-29 at 11 13 32 pm](https://user-images.githubusercontent.com/31137669/35551336-dd81f656-054b-11e8-9bbd-610d81b241d5.png)
+ 
+ - and the database is updated as well.
+ 
+ ![screen shot 2018-01-29 at 11 13 51 pm](https://user-images.githubusercontent.com/31137669/35551447-5d20966a-054c-11e8-8326-51a786128a67.png)
+ 
    
 ## Copyright
 Copyright © 2018 Shirley Ramirez
