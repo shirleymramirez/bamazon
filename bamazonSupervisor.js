@@ -32,13 +32,13 @@ function supervisorView() {
             createNewDepartment();
         }
     })
-}
+};
 
 function viewProductSales() {
     connection.query(
-        " SELECT departments.department_id, departments.department_name, departments.over_head_costs, product_sales, (product_sales-departments.over_head_costs) AS total_profit  " +
+        " SELECT departments.department_id, departments.department_name, departments.over_head_costs, product_sales, ( product_sales - departments.over_head_costs ) AS total_profit  " +
         " FROM products JOIN departments" +
-        " ON products.department_name = departments.department_name WHERE departments.department_name IS NOT NULL ",
+        " ON products.department_name = departments.department_name WHERE departments.department_name IS NOT NULL ORDER BY departments.department_id ASC",
         function(err, res) {
             if (err) throw err;
             var table = new Table({
@@ -74,5 +74,19 @@ function viewProductSales() {
 }
 
 function createNewDepartment() {
-
+    inquirer.prompt({
+        name: "department_name",
+        type: "input",
+        message: "Please enter the department name: "
+    }).then(function(answer) {
+        answer.over_head_costs = 0;
+        var queryStr = " INSERT INTO departments SET ? ";
+        connection.query(queryStr, answer, function(err, res, fields) {
+            if (err) throw err;
+            log(chalk.magenta("\n----------------------------------------\n"));
+            log("You jus add a new department named: " + answer.department_name);
+            log(chalk.magenta("\n----------------------------------------\n"));
+            connection.end();
+        });
+    })
 }

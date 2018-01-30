@@ -203,6 +203,7 @@ function addNewProduct() {
             message: "Please enter the quantity of the item: "
         }
     ]).then(function(answer) {
+        answer.product_sales = 0;
         log(chalk.magenta("\n----------------------------------------\n"));
         log("Adding New Item: \n    product_name = " + answer.product_name + "\n" + "    department_name = " + answer.department_name + "\n" + "    price = " + answer.price +
             "\n" + "    stock_quantity = " + answer.stock_quantity);
@@ -214,7 +215,7 @@ function addNewProduct() {
             log(chalk.magenta("\n----------------------------------------\n"));
             log("New product has been added to the inventory under Item ID " + res.insertId + ".");
             log(chalk.magenta("\n----------------------------------------\n"));
-            var newqueryStr = "SELECT item_id, product_name, department_name, price, stock_quantity FROM products WHERE ?";
+            // var newqueryStr = "SELECT item_id, product_name, department_name, price, stock_quantity FROM products WHERE product_sales IS NOT NULL ?";
             connection.end();
         });
     });
