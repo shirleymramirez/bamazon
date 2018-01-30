@@ -38,7 +38,7 @@ connection.connect(function(err) {
         for (var i = 0; i < res.length; i++) {
             table.push([res[i].item_id, res[i].product_name, res[i].price, res[i].product_sales]);
         }
-        log();
+        log(); // this log here is added just to add space in the console log terminal
         log(chalk.yellow.underline.bold("Welcome to bamazon Online Store ") + chalk.green.underline.bold("by Shirley Ramirez"));
         log();
         log(table.toString());
