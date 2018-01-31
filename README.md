@@ -105,12 +105,14 @@ Making sure that our app still updates the inventory listed in the products colu
 
 - When a supervisor selects Create New Department, below is the output in the terminal
 
- ![screen shot 2018-01-29 at 11 13 32 pm](https://user-images.githubusercontent.com/31137669/35551336-dd81f656-054b-11e8-9bbd-610d81b241d5.png)
+![screen shot 2018-01-30 at 1 51 05 pm](https://user-images.githubusercontent.com/31137669/35590652-c1259912-05c4-11e8-8897-df92ad4a7796.png)
  
  - and the database is updated as well.
  
- ![screen shot 2018-01-29 at 11 13 51 pm](https://user-images.githubusercontent.com/31137669/35551447-5d20966a-054c-11e8-8326-51a786128a67.png)
- 
+![screen shot 2018-01-30 at 1 50 52 pm](https://user-images.githubusercontent.com/31137669/35590685-d67d3b9e-05c4-11e8-84f2-f4b8d7a45240.png)
+
+
+-----------------------------------------------------
    
 ## Copyright
 Copyright © 2018 Shirley Ramirez
