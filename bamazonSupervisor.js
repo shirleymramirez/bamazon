@@ -47,9 +47,11 @@ function viewProductSales() {
     // total profit was computer here as well
     // set the depatment id in ascending order
     connection.query(
-        " SELECT departments.department_id, departments.department_name, departments.over_head_costs, product_sales, ( product_sales - departments.over_head_costs ) AS total_profit  " +
+        " SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(product_sales) AS total_department_sales, (SUM(product_sales) - departments.over_head_costs ) AS total_profit  " +
         " FROM products JOIN departments" +
-        " ON products.department_name = departments.department_name WHERE departments.department_name IS NOT NULL ORDER BY departments.department_id ASC",
+        " ON products.department_name = departments.department_name WHERE departments.department_name IS NOT NULL " +
+        " GROUP BY departments.department_id " +
+        " ORDER BY departments.department_id ASC ",
         function(err, res) {
             if (err) throw err;
 
@@ -74,7 +76,7 @@ function viewProductSales() {
                     res[i].department_id,
                     res[i].department_name,
                     res[i].over_head_costs,
-                    res[i].product_sales,
+                    res[i].total_department_sales,
                     res[i].total_profit
                 ]);
             }
