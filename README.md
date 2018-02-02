@@ -98,10 +98,11 @@ Making sure that our app still updates the inventory listed in the products colu
 
 - When a supervisor selects View Product Sales by Department, the app should display a summarized table in their terminal/bash window. 
 
-![screen shot 2018-01-29 at 10 43 29 pm](https://user-images.githubusercontent.com/31137669/35551213-59fe509a-054b-11e8-907c-658e2a349d3c.png)
+![screen shot 2018-01-31 at 4 42 32 pm](https://user-images.githubusercontent.com/31137669/35653612-5e46b10e-06a6-11e8-94d7-9097b3ff679a.png)
 
     - The total_profit column was calculated on the fly using the difference between over_head_costs and product_sales. 
-    - It was not stored in any database. Used a custom alias for total_profit.
+    - It was not stored in any database.
+    - Used a custom alias for total_profit.
 
 - When a supervisor selects Create New Department, below is the output in the terminal
 
